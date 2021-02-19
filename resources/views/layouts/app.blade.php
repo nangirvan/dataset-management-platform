@@ -9,6 +9,8 @@
 </head>
 <body>
     
+    <x-navbar></x-navbar>
+
     <div class="container">
         @yield('content')
     </div>
