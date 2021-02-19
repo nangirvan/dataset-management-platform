@@ -25,4 +25,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function uploaded_tasks()
+    {
+        return $this->hasMany(Task::class, 'id_uploader', 'id');
+    }
+
+    public function booked_tasks()
+    {
+        return $this->belongsToMany(Task::class, 'bookings', 'id_user', 'id_task')->withPivot('booked_at');
+    }
 }

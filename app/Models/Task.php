@@ -23,4 +23,14 @@ class Task extends Model
     protected $hidden = [
         'deleted_at',
     ];
+
+    public function uploader()
+    {
+        return $this->belongsTo(User::class, 'id_uploader', 'id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'bookings', 'id_task', 'id_user')->withPivot('booked_at');
+    }
 }
