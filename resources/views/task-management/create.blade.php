@@ -20,7 +20,7 @@
             <div id="inAddTaskName" class="form-text">Hanya file dengan format .zip yang diperbolehkan.</div>
         </div>
         <button type="submit" class="btn btn-primary me-2">Submit</button>
-        <a href="#" class="btn btn-danger">Cancel</a>
+        <a href="{{ route('home') }}" class="btn btn-danger">Cancel</a>
     </form>
     </div>
 
