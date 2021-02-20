@@ -25,7 +25,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('auth.logout') }}">
                                 <i class="fas fa-sign-out-alt me-1"></i>
                                 <span>Logout</span>
                             </a>
