@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskManagementController extends Controller
@@ -13,7 +14,9 @@ class TaskManagementController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::with('users')->where('id_uploader', auth()->id())->get();
+
+        return view('task-management.index', compact('tasks'));
     }
 
     /**

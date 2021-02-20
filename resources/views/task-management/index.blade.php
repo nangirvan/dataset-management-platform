@@ -26,18 +26,31 @@
                 </tr>
             </thead>
             <tbody class="bg-light">
+                @foreach($tasks as $task)
                 <tr class="align-middle">
-                    <td>1</td>
-                    <td>task_a</td>
-                    <td>1KB</td>
-                    <td>Booked</td>
+                    <td>
+                        {{ $loop->iteration }}
+                    </td>
+                    <td>
+                        <strong>{{ $task->name }}</strong>
+                    </td>
+                    <td>
+                        {{ $task->file_size }}
+                    </td>
+                    <td>
+                        @if (sizeof($task->users))
+                            Booked
+                        @else
+                            Not Booked
+                        @endif
+                    </td>
                     <td>
                         <div class="d-flex justify-content-start">
-                            <a href="#" class="btn btn-primary me-2 disabled">
+                            <a href="#" class="btn btn-primary me-2 @if(sizeof($task->users) > 0) disabled @endif">
                                 <i class="fas fa-ticket-alt"></i>
                                 Booking
                             </a>
-                            <a href="#" class="btn btn-danger me-2">
+                            <a href="#" class="btn btn-danger me-2 @if(sizeof($task->users) == 0) disabled @endif">
                                 <i class="fas fa-times"></i>
                                 Revoke
                             </a>
@@ -45,7 +58,7 @@
                     </td>
                     <td>
                         <div class="d-flex justify-content-start">
-                            <a href="#" class="btn btn-primary me-2">
+                            <a href="#" class="btn btn-primary me-2 @if(sizeof($task->users) == 0) disabled @endif">
                                 <i class="fas fa-download"></i>
                                 Download
                             </a>
@@ -60,40 +73,7 @@
                         </div>
                     </td>
                 </tr>
-                <tr class="align-middle">
-                    <td>1</td>
-                    <td>task_ba</td>
-                    <td>128B</td>
-                    <td>Not Booked</td>
-                    <td>
-                        <div class="d-flex justify-content-start">
-                            <a href="#" class="btn btn-primary me-2">
-                                <i class="fas fa-ticket-alt"></i>
-                                Booking
-                            </a>
-                            <a href="#" class="btn btn-danger me-2 disabled">
-                                <i class="fas fa-times"></i>
-                                Revoke
-                            </a>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex justify-content-start">
-                            <a href="#" class="btn btn-primary me-2 disabled">
-                                <i class="fas fa-download"></i>
-                                Download
-                            </a>
-                            <form action="#" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">
-                                    <i class="fas fa-trash"></i>
-                                    Delete
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
