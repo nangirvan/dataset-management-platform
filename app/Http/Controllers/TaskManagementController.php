@@ -42,20 +42,18 @@ class TaskManagementController extends Controller
      */
     public function store(CreateTaskValidation $request)
     {
-        $dataset = ($request->validated()['name'] == null) ? $request->validated()['dataset'] : $request->validated()['name'].'.zip';
-        $name = ($request->validated()['name'] == null) ? explode('.', $request->validated()['dataset'])[0] : $request->validated()['name'];
-        
+        $file_name = ($request->validated()['name'] == null) ? $request->dataset->getClientOriginalName() : $request->validated()['name'].'.'.$request->dataset->extension();
         $data = [
             'id_uploader' => auth()->id(),
-            'name' => $name,
-            'file_path' => 'datasets/user'.auth()->id().'/'.$dataset,
-            'file_size' => '1020',
+            'name' => $file_name,
+            'file_path' => $request->dataset->storeAs('datasets/'.auth()->id(), $file_name, 'public'),
+            'file_size' => $request->dataset->getSize(),
             'uploaded_at' => Carbon::now(),
         ];
-        
-        Task::create($data);
 
-        return redirect()->route('task-management.index')->with('success', 'Task berhasil ditambahkan');
+        Task::create($data);
+        
+        return redirect()->route('task-management.index')->with('success', 'Dataset berhasil di upload');
     }
 
     /**
