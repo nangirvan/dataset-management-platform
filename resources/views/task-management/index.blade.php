@@ -7,7 +7,7 @@
                 <h4 class="text-secondary fw-bold">Tasks</h4>
             </div>
             <div>
-                <a href="#" class="btn btn-secondary fw-bold">
+                <a href="{{ route('task-management.create') }}" class="btn btn-secondary fw-bold">
                     <i class="fas fa-upload me-1"></i>
                     Upload Dataset
                 </a>
