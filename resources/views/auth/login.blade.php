@@ -13,7 +13,7 @@
                 </div>
                 @enderror
                 <h4 class="card-subtitle text-center mt-4 mb-4 fw-bolder">LOGIN</h4>
-                <form action="#" method="POST">
+                <form action="{{ route('auth.login') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="inLoginEmailAddon">
