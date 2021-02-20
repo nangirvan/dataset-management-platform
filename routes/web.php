@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function() {
     Route::resources([
         '/task-management' => TaskManagementController::class,
     ]);
-    Route::post('task-management/booking', [TaskManagementController::class, 'booking'])->name('task-management.booking');
-    Route::post('task-management/revoke-booking', [TaskManagementController::class, 'revokeBooking'])->name('task-management.revoke-booking');
+    Route::prefix('task-management')->name('task-management.')->group(function() {
+        Route::post('/booking', [TaskManagementController::class, 'booking'])->name('booking');
+        Route::post('/revoke-booking', [TaskManagementController::class, 'revokeBooking'])->name('revoke-booking');    
+    });
 });
