@@ -97,6 +97,8 @@ class TaskManagementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Task::find($id)->delete();
+
+        return redirect()->route('home')->with('success', 'Task berhasil dihapus');
     }
 }

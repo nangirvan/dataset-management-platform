@@ -63,7 +63,7 @@
                                     <i class="fas fa-download"></i>
                                     Download
                                 </a>
-                                <form action="#" method="POST">
+                                <form action="{{ route('task-management.destroy', $task->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">
