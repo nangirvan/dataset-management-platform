@@ -51,6 +51,6 @@ class Task extends Model
 
     public function getUploadedAtAttribute($value)
     {
-        return Carbon::parse($value)->format('Y M d');
+        return Carbon::parse($value)->diffForHumans();
     }
 }
