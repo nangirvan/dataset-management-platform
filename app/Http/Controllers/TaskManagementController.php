@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RevokeBookingValidation;
 use App\Http\Requests\BookingValidation;
 use App\Http\Requests\CreateTaskValidation;
+use App\Http\Requests\DownloadTaskValidation;
 use App\Models\Task;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TaskManagementController extends Controller
 {
@@ -115,5 +117,10 @@ class TaskManagementController extends Controller
         User::find(auth()->id())->booked_tasks()->detach($request->validated()['id']);
 
         return redirect()->route('task-management.index')->with('success', 'Task yang di booking berhasil di revoke');
+    }
+
+    public function downloadDataset(DownloadTaskValidation $request)
+    {
+        return Storage::download('public/'.Task::find($request->validated()['id'])->file_path);
     }
 }

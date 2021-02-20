@@ -78,10 +78,14 @@
                         </td>
                         <td>
                             <div class="d-flex justify-content-start">
-                                <a href="#" class="btn btn-primary me-2 @if(sizeof($task->users) == 0) disabled @endif">
-                                    <i class="fas fa-download"></i>
-                                    Download
-                                </a>
+                                <form action="{{ route('task-management.download') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $task->id }}">
+                                    <button type="submit" class="btn btn-primary me-2 @if(sizeof($task->users) == 0) disabled @endif">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </button>
+                                </form>
                                 <form action="{{ route('task-management.destroy', $task->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')

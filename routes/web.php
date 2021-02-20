@@ -29,5 +29,6 @@ Route::middleware('auth')->group(function() {
     Route::prefix('task-management')->name('task-management.')->group(function() {
         Route::post('/booking', [TaskManagementController::class, 'booking'])->name('booking');
         Route::post('/revoke-booking', [TaskManagementController::class, 'revokeBooking'])->name('revoke-booking');    
+        Route::post('/download', [TaskManagementController::class, 'downloadDataset'])->name('download');
     });
 });
