@@ -62,10 +62,14 @@
                                         Booking
                                     </button>
                                 </form>
-                                <a href="#" class="btn btn-danger me-2 @if(sizeof($task->users) == 0) disabled @endif">
-                                    <i class="fas fa-times"></i>
-                                    Revoke
-                                </a>
+                                <form action="{{ route('task-management.revoke-booking') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $task->id }}">
+                                    <button type="submit" class="btn btn-danger me-2 @if(sizeof($task->users) == 0) disabled @endif">
+                                        <i class="fas fa-times"></i>
+                                        Revoke
+                                    </button>
+                                </form>
                             </div>
                         </td>
                         <td>

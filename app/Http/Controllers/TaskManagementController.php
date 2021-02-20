@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RevokeBookingValidation;
 use App\Http\Requests\BookingValidation;
 use App\Http\Requests\CreateTaskValidation;
 use App\Models\Task;
@@ -109,5 +110,12 @@ class TaskManagementController extends Controller
         User::find(auth()->id())->booked_tasks()->attach($request->validated()['id'], ['booked_at' => Carbon::now()]);
 
         return redirect()->route('task-management.index')->with('success', 'Task berhasil di booking');
+    }
+
+    public function revokeBooking(RevokeBookingValidation $request)
+    {
+        User::find(auth()->id())->booked_tasks()->detach($request->validated()['id']);
+
+        return redirect()->route('task-management.index')->with('success', 'Task yang di booking berhasil di revoke');
     }
 }
