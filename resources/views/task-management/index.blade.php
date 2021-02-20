@@ -28,6 +28,7 @@
                         <th scope="col">NO</th>
                         <th scope="col">NAME</th>
                         <th scope="col">SIZE</th>
+                        <th scope="col">DATE UPLOADED</th>
                         <th scope="col">STATUS</th>
                         <th scope="col">BOOKING</th>
                         <th scope="col">ACTION</th>
@@ -44,6 +45,9 @@
                         </td>
                         <td>
                             {{ $task->file_size }}
+                        </td>
+                        <td>
+                            {{ $task->uploaded_at }}
                         </td>
                         <td>
                             @if (sizeof($task->users))
