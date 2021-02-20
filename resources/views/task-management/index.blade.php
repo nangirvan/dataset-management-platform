@@ -2,6 +2,13 @@
 @section('content')
 
     <div class="mt-4">
+        @if(session('success'))
+        <div class="alert alert-primary alert-dismissible fade show text-center" role="alert">
+            <strong>Success!</strong> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
         <div class="d-flex justify-content-between mb-4">
             <div>
                 <h4 class="text-secondary fw-bold">Tasks</h4>

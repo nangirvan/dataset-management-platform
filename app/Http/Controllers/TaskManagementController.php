@@ -52,7 +52,7 @@ class TaskManagementController extends Controller
         
         Task::create($data);
 
-        return redirect()->route('home')->with('success', 'Task berhasil ditambahkan');
+        return redirect()->route('task-management.index')->with('success', 'Task berhasil ditambahkan');
     }
 
     /**
@@ -99,6 +99,6 @@ class TaskManagementController extends Controller
     {
         Task::find($id)->delete();
 
-        return redirect()->route('home')->with('success', 'Task berhasil dihapus');
+        return redirect()->route('task-management.index')->with('success', 'Task berhasil dihapus');
     }
 }
