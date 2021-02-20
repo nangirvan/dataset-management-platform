@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTaskValidation;
 use App\Models\Task;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TaskManagementController extends Controller
@@ -26,7 +28,7 @@ class TaskManagementController extends Controller
      */
     public function create()
     {
-        //
+        return view('task-management.create');
     }
 
     /**
@@ -35,9 +37,22 @@ class TaskManagementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateTaskValidation $request)
     {
-        //
+        $dataset = ($request->validated()['name'] == null) ? $request->validated()['dataset'] : $request->validated()['name'].'.zip';
+        $name = ($request->validated()['name'] == null) ? explode('.', $request->validated()['dataset'])[0] : $request->validated()['name'];
+        
+        $data = [
+            'id_uploader' => auth()->id(),
+            'name' => $name,
+            'file_path' => 'datasets/user'.auth()->id().'/'.$dataset,
+            'file_size' => '1020',
+            'uploaded_at' => Carbon::now(),
+        ];
+        
+        Task::create($data);
+
+        return redirect()->route('home')->with('success', 'Task berhasil ditambahkan');
     }
 
     /**
