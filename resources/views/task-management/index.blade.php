@@ -54,10 +54,14 @@
                         </td>
                         <td>
                             <div class="d-flex justify-content-start">
-                                <a href="#" class="btn btn-primary me-2 @if(sizeof($task->users) > 0) disabled @endif">
-                                    <i class="fas fa-ticket-alt"></i>
-                                    Booking
-                                </a>
+                                <form action="{{ route('task-management.booking') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $task->id }}">
+                                    <button type="submit" class="btn btn-primary me-2 @if(sizeof($task->users) > 0) disabled @endif">
+                                        <i class="fas fa-ticket-alt"></i>
+                                        Booking
+                                    </button>
+                                </form>
                                 <a href="#" class="btn btn-danger me-2 @if(sizeof($task->users) == 0) disabled @endif">
                                     <i class="fas fa-times"></i>
                                     Revoke

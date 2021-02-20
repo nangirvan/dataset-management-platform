@@ -26,4 +26,5 @@ Route::middleware('auth')->group(function() {
     Route::resources([
         '/task-management' => TaskManagementController::class,
     ]);
+    Route::post('task-management/booking', [TaskManagementController::class, 'booking'])->name('task-management.booking');
 });
