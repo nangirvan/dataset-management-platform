@@ -25,7 +25,14 @@ class CreateTaskValidation extends FormRequest
     {
         return [
             'name' => '',
-            'dataset' => 'required'
+            'dataset' => 'required|file|mimes:zip'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'dataset.mimes' => 'File type must be a .zip',
         ];
     }
 }
