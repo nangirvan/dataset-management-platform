@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TaskManagementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('task-management.index');
-})->middleware('auth');
+Route::redirect('/', '/task-management')->name('home')->middleware('auth');
 
 Route::prefix('auth')->name('auth.')->group(function() {
     Route::get('/login', [AuthController::class, 'index'])->name('login.view');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+
+Route::resources([
+    '/task-management' => TaskManagementController::class,
+]);
