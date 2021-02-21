@@ -19,9 +19,15 @@ class TaskManagementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::with('users')->where('id_uploader', auth()->id())->get();
+        $tasks = Task::with('users')->where('id_uploader', auth()->id());
+
+        if ($request->task_name) {
+            $tasks->where('name', 'like', "%$request->task_name%.zip");
+        }
+
+        $tasks = $tasks->get();
 
         return view('task-management.index', compact('tasks'));
     }
@@ -55,7 +61,7 @@ class TaskManagementController extends Controller
 
         Task::create($data);
         
-        return redirect()->route('task-management.index')->with('success', 'Dataset berhasil di upload');
+        return redirect()->route('task-management.index')->with('success', 'Dataset uploaded');
     }
 
     /**
@@ -100,23 +106,24 @@ class TaskManagementController extends Controller
      */
     public function destroy($id)
     {
+        User::find(auth()->id())->booked_tasks()->detach($id);
         Task::find($id)->delete();
 
-        return redirect()->route('task-management.index')->with('success', 'Task berhasil dihapus');
+        return redirect()->route('task-management.index')->with('success', 'Task deleted');
     }
 
     public function booking(BookingValidation $request)
     {
         User::find(auth()->id())->booked_tasks()->attach($request->validated()['id'], ['booked_at' => Carbon::now()]);
 
-        return redirect()->route('task-management.index')->with('success', 'Task berhasil di booking');
+        return redirect()->route('task-management.index')->with('success', 'Task booked');
     }
 
     public function revokeBooking(RevokeBookingValidation $request)
     {
         User::find(auth()->id())->booked_tasks()->detach($request->validated()['id']);
 
-        return redirect()->route('task-management.index')->with('success', 'Task yang di booking berhasil di revoke');
+        return redirect()->route('task-management.index')->with('success', 'Task revoked');
     }
 
     public function downloadDataset(DownloadTaskValidation $request)

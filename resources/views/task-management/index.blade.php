@@ -9,11 +9,17 @@
         </div>
         @endif
 
-        <div class="d-flex justify-content-between mb-4">
-            <div>
+        <div class="row mb-4 text-center">
+            <div class="col-sm text-md-start my-2 my-md-0">
                 <h4 class="text-secondary fw-bold">Tasks</h4>
             </div>
-            <div>
+            <div class="col-sm my-2 my-md-0">
+                <form action="#" method="GET" class="d-flex">
+                    <input class="form-control me-2" type="search" name="task_name" placeholder="Task name ..." aria-label="Search">
+                    <button class="btn btn-outline-secondary text-secondary" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="col-sm text-md-end my-2 my-md-0">
                 <a href="{{ route('task-management.create') }}" class="btn btn-secondary fw-bold">
                     <i class="fas fa-upload me-1"></i>
                     Upload Dataset
@@ -61,17 +67,17 @@
                                 <form action="{{ route('task-management.booking') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $task->id }}">
-                                    <button type="submit" class="btn btn-primary me-2 @if(sizeof($task->users) > 0) disabled @endif">
+                                    <button type="submit" class="btn btn-sm btn-primary me-2 @if(sizeof($task->users) > 0) disabled @endif">
                                         <i class="fas fa-ticket-alt"></i>
-                                        Booking
+                                        <span>Booking</span>
                                     </button>
                                 </form>
-                                <form action="{{ route('task-management.revoke-booking') }}" method="POST">
+                                <form action="{{ route('task-management.revoke-booking') }}" method="POST" onsubmit="return confirm('Are you sure?')">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $task->id }}">
-                                    <button type="submit" class="btn btn-danger me-2 @if(sizeof($task->users) == 0) disabled @endif">
+                                    <button type="submit" class="btn btn-sm btn-danger me-2 @if(sizeof($task->users) == 0) disabled @endif">
                                         <i class="fas fa-times"></i>
-                                        Revoke
+                                        <span>Revoke</span>
                                     </button>
                                 </form>
                             </div>
@@ -81,17 +87,17 @@
                                 <form action="{{ route('task-management.download') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $task->id }}">
-                                    <button type="submit" class="btn btn-primary me-2 @if(sizeof($task->users) == 0) disabled @endif">
+                                    <button type="submit" class="btn btn-sm btn-primary me-2 @if(sizeof($task->users) == 0) disabled @endif">
                                         <i class="fas fa-download"></i>
-                                        Download
+                                        <span>Download</span>
                                     </button>
                                 </form>
-                                <form action="{{ route('task-management.destroy', $task->id) }}" method="POST">
+                                <form action="{{ route('task-management.destroy', $task->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">
+                                    <button type="submit" class="btn btn-sm btn-danger">
                                         <i class="fas fa-trash"></i>
-                                        Delete
+                                        <span>Delete</span>
                                     </button>
                                 </form>
                             </div>
