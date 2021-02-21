@@ -72,7 +72,7 @@
                                         <span>Booking</span>
                                     </button>
                                 </form>
-                                <form action="{{ route('task-management.revoke-booking') }}" method="POST">
+                                <form action="{{ route('task-management.revoke-booking') }}" method="POST" onsubmit="return confirm('Are you sure?')">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $task->id }}">
                                     <button type="submit" class="btn btn-sm btn-danger me-2 @if(sizeof($task->users) == 0) disabled @endif">
@@ -92,7 +92,7 @@
                                         <span>Download</span>
                                     </button>
                                 </form>
-                                <form action="{{ route('task-management.destroy', $task->id) }}" method="POST">
+                                <form action="{{ route('task-management.destroy', $task->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">
