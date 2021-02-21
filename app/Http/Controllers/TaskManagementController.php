@@ -106,6 +106,7 @@ class TaskManagementController extends Controller
      */
     public function destroy($id)
     {
+        User::find(auth()->id())->booked_tasks()->detach($id);
         Task::find($id)->delete();
 
         return redirect()->route('task-management.index')->with('success', 'Task deleted');
