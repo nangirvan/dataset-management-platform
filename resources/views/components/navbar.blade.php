@@ -20,12 +20,6 @@
                     <ul class="mt-2 dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarScrollingDropdown">
                         <li>
                             <a class="dropdown-item" href="#">
-                                <i class="fas fa-user-circle me-1"></i>
-                                <span>Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">
                                 <i class="fas fa-sign-out-alt me-1"></i>
                                 <span>Logout</span>
                             </a>
