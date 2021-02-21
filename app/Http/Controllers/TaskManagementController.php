@@ -24,7 +24,7 @@ class TaskManagementController extends Controller
         $tasks = Task::with('users')->where('id_uploader', auth()->id());
 
         if ($request->task_name) {
-            $tasks->where('name', 'like', "%$request->task_name%");
+            $tasks->where('name', 'like', "%$request->task_name%.zip");
         }
 
         $tasks = $tasks->get();
