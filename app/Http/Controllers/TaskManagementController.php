@@ -22,7 +22,7 @@ class TaskManagementController extends Controller
     public function index()
     {
         $tasks = Task::with('users')->where('id_uploader', auth()->id())->orderBy('uploaded_at', 'desc')->get();
-        // return $tasks;
+        
         return view('task-management.index', compact('tasks'));
     }
 
