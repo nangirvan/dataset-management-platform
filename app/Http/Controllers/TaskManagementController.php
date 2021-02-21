@@ -19,10 +19,16 @@ class TaskManagementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::with('users')->where('id_uploader', auth()->id())->orderBy('uploaded_at', 'desc')->get();
-        
+        $tasks = Task::with('users')->where('id_uploader', auth()->id());
+
+        if ($request->task_name) {
+            $tasks->where('name', 'like', "%$request->task_name%");
+        }
+
+        $tasks = $tasks->get();
+
         return view('task-management.index', compact('tasks'));
     }
 
