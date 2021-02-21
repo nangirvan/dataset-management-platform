@@ -55,7 +55,7 @@ class TaskManagementController extends Controller
 
         Task::create($data);
         
-        return redirect()->route('task-management.index')->with('success', 'Dataset berhasil di upload');
+        return redirect()->route('task-management.index')->with('success', 'Dataset uploaded');
     }
 
     /**
@@ -102,21 +102,21 @@ class TaskManagementController extends Controller
     {
         Task::find($id)->delete();
 
-        return redirect()->route('task-management.index')->with('success', 'Task berhasil dihapus');
+        return redirect()->route('task-management.index')->with('success', 'Task deleted');
     }
 
     public function booking(BookingValidation $request)
     {
         User::find(auth()->id())->booked_tasks()->attach($request->validated()['id'], ['booked_at' => Carbon::now()]);
 
-        return redirect()->route('task-management.index')->with('success', 'Task berhasil di booking');
+        return redirect()->route('task-management.index')->with('success', 'Task booked');
     }
 
     public function revokeBooking(RevokeBookingValidation $request)
     {
         User::find(auth()->id())->booked_tasks()->detach($request->validated()['id']);
 
-        return redirect()->route('task-management.index')->with('success', 'Task yang di booking berhasil di revoke');
+        return redirect()->route('task-management.index')->with('success', 'Task revoked');
     }
 
     public function downloadDataset(DownloadTaskValidation $request)
