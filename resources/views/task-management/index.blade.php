@@ -13,6 +13,11 @@
             <div>
                 <h4 class="text-secondary fw-bold">Tasks</h4>
             </div>
+            <form action="#" method="GET" class="d-flex">
+                @csrf
+                <input class="form-control me-2" type="search" placeholder="Task name ..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
             <div>
                 <a href="{{ route('task-management.create') }}" class="btn btn-secondary fw-bold">
                     <i class="fas fa-upload me-1"></i>
