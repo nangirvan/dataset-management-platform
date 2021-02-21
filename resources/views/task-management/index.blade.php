@@ -67,17 +67,17 @@
                                 <form action="{{ route('task-management.booking') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $task->id }}">
-                                    <button type="submit" class="btn btn-primary me-2 @if(sizeof($task->users) > 0) disabled @endif">
+                                    <button type="submit" class="btn btn-sm btn-primary me-2 @if(sizeof($task->users) > 0) disabled @endif">
                                         <i class="fas fa-ticket-alt"></i>
-                                        Booking
+                                        <span>Booking</span>
                                     </button>
                                 </form>
                                 <form action="{{ route('task-management.revoke-booking') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $task->id }}">
-                                    <button type="submit" class="btn btn-danger me-2 @if(sizeof($task->users) == 0) disabled @endif">
+                                    <button type="submit" class="btn btn-sm btn-danger me-2 @if(sizeof($task->users) == 0) disabled @endif">
                                         <i class="fas fa-times"></i>
-                                        Revoke
+                                        <span>Revoke</span>
                                     </button>
                                 </form>
                             </div>
@@ -87,17 +87,17 @@
                                 <form action="{{ route('task-management.download') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $task->id }}">
-                                    <button type="submit" class="btn btn-primary me-2 @if(sizeof($task->users) == 0) disabled @endif">
+                                    <button type="submit" class="btn btn-sm btn-primary me-2 @if(sizeof($task->users) == 0) disabled @endif">
                                         <i class="fas fa-download"></i>
-                                        Download
+                                        <span>Download</span>
                                     </button>
                                 </form>
                                 <form action="{{ route('task-management.destroy', $task->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">
+                                    <button type="submit" class="btn btn-sm btn-danger">
                                         <i class="fas fa-trash"></i>
-                                        Delete
+                                        <span>Delete</span>
                                     </button>
                                 </form>
                             </div>
